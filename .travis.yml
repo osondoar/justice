@@ -1,5 +1,21 @@
 language: ruby
 script:
-- export RAILS_ENV=test
-- bundle exec rake db:create db:test:prepare
-- bundle exec rspec
+  - export RAILS_ENV=test
+  - bundle exec rake db:create db:test:prepare
+  - bundle exec rspec
+deploy:
+  provider: elasticbeanstalk
+  secret_access_key:
+    secure: sTycQBbziwL5M1bvTm36nu9FLdcFlcue9Udwab8aFZ3JlhF3z31jmvykJiCESP+uT4nH3+ZkHUO7qKHv1FBFeNwkXnPnvIcb2rHHfQdRCMrgTSoOv1cOgblBZroDEGvhgcBRG+VsvAJCHSncLZ9idySrvaLqgWHkK8Kj0k9vJWqJhMM2yTKs1BjE4wZ/wNGHPpF/4RigA3kLrZNarr+FNBoT8TQT/L/7zwblSslDdO8mhIN2Hi0lq2tnlCh7It4o1HOxJgMdQOcdhiDt2JcxA/Hh7Am5ADi3FSS1uQ3XH3qtgKoGmccdQj3h+KfQ388xwboUasUhjToGPA/CaCYPRV6X2+gJoK38xjIgX+xoLJV/vryI0bpsVSaRTh/1vkKr2lq4Yk8xcvdTkDSD5f2RNsHPezLBI4xNKjY+iISSLuayiJ19FvpKI2vxZGmuuATtyT15fZEBeEnYVyY8coewvjFZNYkWHIDRJhiEOtlLoq1DlL3LeBabFDlPTpGf+oku5MLUuroCpvgHFEGxJFRXpV5bLuDtkv7Wn0aeH/lkuVR1D/MmB9nM8zn/L8Lt/y47JO4bmlQognYM/BYWuleXtt3Es7uWeZ5TSL86FFXBWqhtPmFg3PXjxfi/25W0oeHy2w7/h1IPnlKluRz7jIbvunHi5JrasLRMIsoMeMiQK2A=
+  access_key_id:
+    secure: WKVFO+GdR3qEJfPKJSTXfVmvdgTK7MqvlxgKvc096PP+CV24io6mdOdrnG9mzlouzHkoRCct/2ACrKbG5c9xroIp+KA6lLDK5X/1SfAARzo6PBZJ7423/CZX7g3fERQshp81NF5WCBfKp3Uq9kWLjw1VH8p/6FUHj6uv+cXjqY09hnBvzz6cwmOIi7g8YojfJFy4BNw7WLKGUxC5V0t0LT4PC4rfARKIzMOuUTfxPYFSHmFKs6Xy6yEyFPN79+x8ajsRKSZQO6BONUtgc9Hs4LmphL6PW1Zyiztv5hT2hPqbzcaCBAHklBOv2oj5eNj4ZVKQ9KBW59d0Z2gCjRkZhG6f5P+/ymSh9dJlzFgBLLd2bNhizJqrDNVJZKhwF9sysf3Y6qKAVuJ4atiI+nmrs1hXHE9WI5yKkEfsFm3tWwIgkFYLxEOtHjA810rZ5uku+QSsPNaHjxwgr0IzETN+cthxQC6o6WJWEgLJD5Pd55TKjT4GKdNbE66Gr4XyNDK/E6+NGYlK2Q+BtRRKTscgioXeALiJbdCqQXlqYAVx0IbW0TSlirfi2V4CjoDmXTpaMfSHDJF+4tzmTyY4G+5T6O2d7bBYYE4llKPfOlVNJvTw4TKbjOBQQotbwfwtM70S+CdgWzSY4qc9tP6naaA6EOaE6YaPImF2gjk0GpWjXfs=
+  region: us-east-1
+  app: Justice For Juniors
+  env: justice-uat3
+  bucket_name: elasticbeanstalk-us-east-1-230550783596
+  on:
+    all_branches: true
+    tags: true
+    condition: "$TRAVIS_TAG =~ ^v[0-9].*$"
+
+
